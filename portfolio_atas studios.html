@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectural Portfolio | Amira Tabassum</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Set Inter font as default -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom scroll behavior for navigation */
+        .nav-link {
+            cursor: pointer;
+        }
+        /* Style for the custom modal/message box */
+        #custom-message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            max-width: 90%;
+            min-width: 300px;
+            pointer-events: none; /* Allows clicks to pass through when hidden */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #custom-message-box.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #message-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            display: none;
+        }
+        #message-backdrop.visible {
+            display: block;
+        }
+        /* Custom classes for project placeholder colors */
+        .project-1-bg { background-color: #A3B18A; }
+        .project-2-bg { background-color: #DAD7CD; }
+        .project-3-bg { background-color: #588157; }
+    </style>
+    <!-- Tailwind Config for Colors/Shadows -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#3A5A40', // Deep Forest Green
+                        'secondary': '#A3B18A', // Muted Olive/Sage for highlight
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- CUSTOM MESSAGE BOX STRUCTURE (Used for LLM responses and alerts) -->
+    <div id="message-backdrop"></div>
+    <div id="custom-message-box" class="bg-white rounded-xl shadow-2xl p-6 border-t-4 border-primary">
+        <h3 id="message-title" class="text-xl font-bold text-gray-900 mb-2"></h3>
+        <div id="message-content" class="text-gray-700 mb-4 whitespace-pre-wrap"></div>
+        <button onclick="closeMessageBox()" class="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:bg-secondary hover:text-gray-900 transition duration-300">
+            Close
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-primary tracking-wider">
+                AMIRA TABASSUM
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#portfolio" class="nav-link text-gray-600 hover:text-secondary transition duration-150">Projects</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-secondary transition duration-150">Skills</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-secondary transition duration-150">Profile</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-secondary transition duration-150">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 transition duration-150">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#portfolio" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 nav-link">Projects</a>
+            <a href="#skills" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 nav-link">Skills</a>
+            <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 nav-link">Profile</a>
+            <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 nav-link">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative overflow-hidden pt-20 pb-20 md:pt-32 md:pb-32 bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+                <!-- Text Content -->
+                <div class="md:w-3/5 order-2 md:order-1 mt-8 md:mt-0 text-center md:text-left">
+                    <p class="text-sm font-semibold uppercase text-secondary mb-2">Architectural Designer | B.Arch 4th Semester</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                        Pioneering <span class="text-primary">Climate-Responsive</span> Design.
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto md:mx-0">
+                        Focused on **environment-friendly** and **green architectural design**, leveraging advanced modeling tools to translate complex briefs into impactful, well-resolved projects.
+                    </p>
+                    <a href="#portfolio" class="inline-block bg-primary text-white font-semibold py-3 px-8 rounded-lg shadow-xl hover:bg-secondary hover:text-gray-900 transition duration-300 transform hover:scale-105">
+                        Explore Design Work
+                    </a>
+                </div>
+                <!-- Mock Image/Visual -->
+                <div class="md:w-2/5 order-1 md:order-2 w-full max-w-sm mx-auto">
+                    <div class="w-full h-80 bg-secondary/30 rounded-xl shadow-2xl flex items-center justify-center border-4 border-white">
+                        <span class="text-primary font-medium text-lg">Your Profile Photo/Key Render</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-16 sm:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 border-b-4 border-secondary inline-block pb-1">Selected Design Projects</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">A selection of academic work highlighting my approach to context, sustainability, and complex program resolution.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                    <!-- Project Card 1: Writer's Atelier Enclave -->
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 group" id="project-1">
+                        <div class="h-48 project-1-bg flex items-center justify-center">
+                            <span class="text-white font-medium">Render Placeholder 1</span>
+                        </div>
+                        <div class="p-6">
+                            <!-- Data Fields for LLM Prompt -->
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2" id="project-1-title">Writer's Atelier Enclave</h3>
+                            <p class="text-sm text-secondary font-medium mb-3">Studio Project | Environmental Psychology Focus</p>
+                            <p class="text-gray-600 text-sm mb-4" id="project-1-description">Designed a **Writer's Atelier Enclave** focused on environmental psychology. The design maximizes **controlled natural daylight** and integrates with the existing landscape to promote isolation and creative flow.</p>
+
+                            <button onclick="generateProjectNarrative()" class="w-full mb-3 bg-primary text-white font-semibold py-2 px-4 rounded-lg hover:bg-secondary hover:text-gray-900 transition duration-300 flex items-center justify-center text-sm">
+                                ✨ Generate Portfolio Caption
+                            </button>
+
+                            <a href="#" onclick="showMessageBox('Project Details','In a final portfolio, this button would link to a dedicated page with drawings and renders.')" class="w-full text-sm font-semibold text-primary border border-primary py-2 px-4 rounded-lg hover:text-white hover:bg-primary transition duration-150 flex items-center justify-center">
+                                View Case Study
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2: Parking Redesign -->
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 group">
+                        <div class="h-48 project-2-bg flex items-center justify-center">
+                            <span class="text-primary font-medium">Render Placeholder 2</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Adaptive Reuse: Vertical Parking</h3>
+                            <p class="text-sm text-secondary font-medium mb-3">Adaptive Reuse Studio | Hatirjheel, Dhaka</p>
+                            <p class="text-gray-600 text-sm">Adaptive Reuse of Elite Convention Hall into a multi-story, vertical parking facility to address acute urban congestion. Project explored **structural modification** and optimized land efficiency through **vertical density**.</p>
+                            <a href="#" onclick="showMessageBox('Project Details','In a final portfolio, this button would link to a dedicated page with drawings and renders.')" class="w-full text-sm font-semibold text-primary border border-primary py-2 px-4 rounded-lg hover:text-white hover:bg-primary transition duration-150 flex items-center justify-center">
+                                View Case Study
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: Residential Design -->
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 group">
+                        <div class="h-48 project-3-bg flex items-center justify-center">
+                            <span class="text-white font-medium">Render Placeholder 3</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Contemporary Sylhet Residence</h3>
+                            <p class="text-sm text-secondary font-medium mb-3">Studio Project | Contextual Design</p>
+                            <p class="text-gray-600 text-sm">Developed a detailed **Contemporary Residential Design** near Sylhet Stadium. The solution achieved a balance between complex client requirements and **passive climatic strategies** derived from in-depth contextual site analysis.</p>
+                            <a href="#" onclick="showMessageBox('Project Details','In a final portfolio, this button would link to a dedicated page with drawings and renders.')" class="w-full text-sm font-semibold text-primary border border-primary py-2 px-4 rounded-lg hover:text-white hover:bg-primary transition duration-150 flex items-center justify-center">
+                                View Case Study
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Tools Section -->
+        <section id="skills" class="py-16 sm:py-24 bg-white border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 border-b-4 border-secondary inline-block pb-1">Software & Expertise</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Proficiency in BIM, modeling, and rendering tools essential for modern practice.</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Modeling & Visualization -->
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-lg w-32 h-32 justify-center transition duration-200 hover:shadow-xl hover:bg-gray-100">
+                        <span class="text-2xl text-primary mb-2">Rhino</span>
+                        <span class="text-xs font-medium text-gray-700 text-center">Rhinoceros 3D</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-lg w-32 h-32 justify-center transition duration-200 hover:shadow-xl hover:bg-gray-100">
+                        <span class="text-2xl text-primary mb-2">Lumion</span>
+                        <span class="text-xs font-medium text-gray-700 text-center">Real-time Rendering</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-lg w-32 h-32 justify-center transition duration-200 hover:shadow-xl hover:bg-gray-100">
+                        <span class="text-2xl text-primary mb-2">D5</span>
+                        <span class="text-xs font-medium text-gray-700 text-center">Ray-tracing Render</span>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-lg w-32 h-32 justify-center transition duration-200 hover:shadow-xl hover:bg-gray-100">
+                        <span class="text-2xl text-primary mb-2">SkUp</span>
+                        <span class="text-xs font-medium text-gray-700 text-center">SketchUp</span>
+                    </div>
+                    <!-- Documentation & BIM -->
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-lg w-32 h-32 justify-center transition duration-200 hover:shadow-xl hover:bg-gray-100">
+                        <span class="text-2xl text-primary mb-2">CAD</span>
+                        <span class="text-xs font-medium text-gray-700 text-center">AutoCAD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile / About Section -->
+        <section id="about" class="py-16 sm:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <!-- Academic Info -->
+                    <div class="lg:col-span-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-secondary inline-block pb-1">Academic & Contact</h3>
+                        <p class="text-lg font-semibold text-primary mt-4">Amira Tabassum</p>
+                        <p class="text-sm text-gray-600">amiratabasssum@gmail.com</p>
+                        <p class="text-sm text-gray-600">+880-163528752</p>
+
+                        <div class="mt-8">
+                            <p class="font-semibold text-gray-800">B.Arch Program</p>
+                            <p class="text-gray-700">Daffodil International University (DIU)</p>
+                            <p class="text-sm text-gray-500">Currently 4th Semester | Expected Graduation: 2029</p>
+                            <p class="text-sm text-primary font-bold mt-1">CGPA: 3.5</p>
+                        </div>
+                    </div>
+
+                    <!-- Professional Profile & Philosophy -->
+                    <div class="lg:col-span-2">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-secondary inline-block pb-1">Professional Profile</h3>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+                            <p class="text-lg text-gray-700 leading-relaxed italic">
+                                Highly motivated Architectural Designer currently in the B.Arch program, boasting a strong academic record (CGPA 3.5). Focused on pioneering solutions in **climate-responsive, environment-friendly, and green architectural design**. Proficient in advanced modeling and rendering software, and committed to translating complex theoretical briefs into impactful and well-resolved design projects.
+                            </p>
+                        </div>
+
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Long-Term Focus</h4>
+                        <p class="text-gray-700 leading-relaxed mb-6" id="philosophy-output">
+                            To establish a career dedicated to **sustainable architectural innovation** and **climate-responsive practices**, integrating environmental management and bio-architecture concepts into impactful, professional design solutions.
+                        </p>
+
+                        <button onclick="critiqueDesignPhilosophy()" class="bg-secondary text-gray-900 font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-secondary/80 transition duration-300 flex items-center justify-center text-sm">
+                            ✨ Expand Philosophy Statement
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 sm:py-24 bg-white border-t border-gray-200">
+            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 border-b-4 border-secondary inline-block pb-1">Get In Touch</h2>
+                <p class="text-lg text-gray-600 mb-8">Ready to collaborate on climate-responsive projects. Reach out via email or phone.</p>
+
+                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
+                    <p class="text-primary font-semibold mb-4">
+                        <span class="text-sm font-light text-gray-600 block mb-1">Email:</span>
+                        <a href="mailto:amiratabasssum@gmail.com" class="text-xl hover:underline">amiratabasssum@gmail.com</a>
+                    </p>
+                     <p class="text-primary font-semibold">
+                        <span class="text-sm font-light text-gray-600 block mb-1">Phone:</span>
+                        <span class="text-xl">+880-163528752</span>
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; <span id="current-year"></span> Amira Tabassum. Architectural Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Global Constants for LLM API ---
+        const apiKey = ""; // API Key for Google Gemini API
+        const GEMINI_MODEL = 'gemini-2.5-flash-preview-09-2025';
+
+        // --- Custom Message Box Functions ---
+        function showMessageBox(title, content) {
+            document.getElementById('message-title').textContent = title;
+            document.getElementById('message-content').textContent = content;
+            document.getElementById('custom-message-box').classList.add('visible');
+            document.getElementById('message-backdrop').classList.add('visible');
+        }
+
+        function closeMessageBox() {
+            document.getElementById('custom-message-box').classList.remove('visible');
+            document.getElementById('message-backdrop').classList.remove('visible');
+        }
+
+        // --- LLM API Utility Functions (with Exponential Backoff) ---
+
+        async function fetchWithBackoff(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        if (response.status === 429) {
+                            throw new Error('Rate limit exceeded (429), retrying...');
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    // console.error(`Fetch attempt ${i + 1} failed:`, error.message); // Commented out to reduce console clutter
+                    if (i === maxRetries - 1) {
+                        throw new Error('Max retries reached. Failed to fetch from API.');
+                    }
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        /**
+         * Generic function to call the Gemini API for text generation.
+         */
+        async function callGeminiApi(systemPrompt, userQuery, isStructured = false, schema = null) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+
+            let payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            const headers = { 'Content-Type': 'application/json' };
+
+            if (isStructured && schema) {
+                payload.generationConfig = {
+                    responseMimeType: "application/json",
+                    responseSchema: schema
+                };
+            }
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    return candidate.content.parts[0].text;
+                } else if (result.error) {
+                    throw new Error(result.error.message || "Unknown API error.");
+                } else {
+                     throw new Error("API response was empty or malformed.");
+                }
+            } catch (error) {
+                console.error("Gemini API Call Failed:", error);
+                showMessageBox("API Error", `Failed to get a response from the AI. Check console for details. Error: ${error.message}`);
+                return null;
+            }
+        }
+
+        // --- FEATURE 1: Project Narrative Refiner (Integrated into Project 1 Card) ---
+
+        const ProjectSchema = {
+            type: "OBJECT",
+            properties: {
+                newTitle: { type: "STRING", description: "A highly impactful and professional title for the architectural project, 8 words max." },
+                newDescription: { type: "STRING", description: "A concise, persuasive, 30-word description highlighting the project's key design principles, materials, and sustainable impact." }
+            },
+            propertyOrdering: ["newTitle", "newDescription"]
+        };
+
+        async function generateProjectNarrative() {
+            const currentTitle = document.getElementById('project-1-title').textContent;
+            const currentDescription = document.getElementById('project-1-description').textContent;
+
+            showMessageBox("Generating Narrative", "Please wait while the AI crafts a more compelling title and description...");
+
+            const systemPrompt = "You are a professional architectural marketer. Your task is to take a raw project description and create a more sophisticated, compelling, and portfolio-ready title and description. You MUST return a JSON object based on the provided schema.";
+            const userQuery = `Current Project Title: "${currentTitle}". Current Description: "${currentDescription}". Generate a new Title and Description that emphasizes environmental psychology, controlled daylight, and landscape integration.`;
+
+            const jsonResponse = await callGeminiApi(systemPrompt, userQuery, true, ProjectSchema);
+
+            closeMessageBox();
+
+            if (jsonResponse) {
+                try {
+                    const data = JSON.parse(jsonResponse);
+                    const outputContent = `
+                        Original Title: ${currentTitle}
+                        Original Description: ${currentDescription}
+
+                        ---
+
+                        ✨ **NEW TITLE:** ${data.newTitle}
+                        ✨ **NEW DESCRIPTION:** ${data.newDescription}
+
+                        *Use this revised caption to maximize impact on your resume/portfolio!*
+                    `;
+                    showMessageBox("Narrative Refined!", outputContent);
+                } catch (e) {
+                    console.error("Failed to parse JSON response:", e);
+                    showMessageBox("Generation Error", "Successfully received a response, but the format was incorrect. Try again.");
+                }
+            }
+        }
+
+        // --- FEATURE 2: Design Philosophy Expander (Integrated into About Section) ---
+
+        async function critiqueDesignPhilosophy() {
+            const outputElement = document.getElementById('philosophy-output');
+            const currentPhilosophy = outputElement.textContent.trim();
+
+            if (!currentPhilosophy) {
+                showMessageBox("Input Required", "The philosophy text is missing. Cannot expand.");
+                return;
+            }
+
+            showMessageBox("Refining Philosophy", "The AI is now expanding and formalizing your design manifesto. This may take a few seconds...");
+
+            const systemPrompt = "You are a leading architectural critic and theorist specializing in sustainability. Your task is to take a student's brief design philosophy and expand it into a detailed, eloquent, and professional manifesto. Use strong vocabulary related to ecological design, material science, and social equity. The output should be a single, detailed paragraph suitable for a thesis or professional statement.";
+            const userQuery = `Expand and refine the following design focus into a compelling, detailed paragraph (around 100-120 words): "${currentPhilosophy}"`;
+
+            const refinedText = await callGeminiApi(systemPrompt, userQuery);
+
+            closeMessageBox();
+
+            if (refinedText) {
+                // Update the philosophy section directly
+                outputElement.textContent = refinedText;
+
+                showMessageBox("Philosophy Expanded", "Your refined manifesto is ready! The 'Long-Term Focus' section has been updated with a more detailed, eloquent statement.");
+            }
+        }
+
+
+        // --- Standard Scripts ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Handle smooth scroll and menu closing
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        if (!mobileMenu.classList.contains('hidden')) {
+                             mobileMenu.classList.add('hidden');
+                        }
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        window.scrollTo({
+                            top: targetElement.offsetTop - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
